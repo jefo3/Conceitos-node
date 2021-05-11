@@ -50,11 +50,16 @@ app.put("/repositories/:id", idValidate ,(request, response) => {
     return response.status(400).json({error: "repositorie not found"})
   }
   
-  repositories[indexRepositorie].title = title
-  repositories[indexRepositorie].url = url
-  repositories[indexRepositorie].techs =techs
+  const repositorie = {
+    id,
+    title,
+    url,
+    techs,
+    likes: repositories[indexRepositorie].likes
+  }
+  repositories[indexRepositorie] = repositorie
 
-  return response.json(repositories[indexRepositorie])
+  return response.json(repositorie)
 
 });
 
